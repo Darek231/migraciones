@@ -36,16 +36,21 @@ class Cliente(db.Model):
         return f"<Cliente {self.nombre}>"
 
 
+
 class Producto(db.Model):
     __tablename__ = "productos"
 
     id = db.Column(db.Integer, primary_key=True)
     descripcion = db.Column(db.String(255), nullable=False)
+    categoria = db.Column(db.String(50))
     precio = db.Column(db.Numeric(10, 2), nullable=False)
     stock = db.Column(db.Integer, nullable=False, default=0)
+
     detalles = db.relationship("DetalleVenta", back_populates="producto")
+
     def __repr__(self):
         return f"<Producto {self.descripcion}>"
+
 class Venta(db.Model):
     __tablename__ = "ventas"
 
